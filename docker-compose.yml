@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_DB=docker
+    ports:
+    - 127.0.0.1:8081:5432
