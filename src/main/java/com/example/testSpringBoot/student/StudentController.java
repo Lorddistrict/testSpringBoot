@@ -16,13 +16,18 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @PostMapping
+    public void add(@RequestBody Student student) {
+        studentService.add(student);
+    }
+
     @GetMapping
     public List<Student> getStudents() {
         return studentService.getStudents();
     }
 
-    @PostMapping
-    public void add(@RequestBody Student student) {
-        studentService.add(student);
+    @DeleteMapping(path = "{studentId}")
+    public void delete(@PathVariable("studentId") Long studentId) {
+        studentService.deleteStudent(studentId);
     }
 }

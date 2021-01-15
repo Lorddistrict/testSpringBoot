@@ -16,10 +16,6 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getStudents() {
-        return studentRepository.findAll();
-    }
-
     public void add(Student student) {
         Optional<Student> studentOptional = studentRepository.findStudentByEmail(student.getEmail());
 
@@ -28,5 +24,19 @@ public class StudentService {
         }
 
         studentRepository.save(student);
+    }
+
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
+    public void deleteStudent(Long studentId) {
+        boolean  exists = studentRepository.existsById(studentId);
+
+        if (!exists) {
+            throw new IllegalStateException("Student doesn't exists");
+        }
+
+        studentRepository.deleteById(studentId);
     }
 }
